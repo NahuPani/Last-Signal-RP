@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Last Signal - Servidor de Project Zomboid</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0c0d0f;
+            color: #d1d5db;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-image: linear-gradient(rgba(12, 13, 15, 0.9), rgba(12, 13, 15, 0.95)), url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        header {
+            padding: 1.5rem 2rem;
+            text-align: center;
+            border-bottom: 2px solid #ef4444;
+            background-color: rgba(20, 22, 25, 0.95);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-title img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid #ef4444;
+            box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+        }
+
+        header h1 {
+            color: #ef4444;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background-color: #1f242d;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid #374151;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            background-color: #ef4444;
+            border-color: #ef4444;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
+
+        /* Sección de Bienvenida / Presentación */
+        .hero-section {
+            background-color: rgba(26, 28, 35, 0.9);
+            border: 1px solid #2d3139;
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-section h2 {
+            color: #f3f4f6;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .hero-section p {
+            color: #9ca3af;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Banner de Alerta Zombi */
+        .zombie-alert {
+            background-color: rgba(127, 29, 29, 0.2);
+            border-left: 4px solid #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 1.2rem;
+            border-radius: 6px;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            color: #fca5a5;
+            font-size: 1.05rem;
+        }
+
+        /* Estado del Servidor */
+        .server-status-container {
+            background-color: rgba(26, 28, 35, 0.9);
+            border: 1px solid #2d3139;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+            text-align: center;
+        }
+
+        .server-status-container h2 {
+            color: #ef4444;
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: #141619;
+            border: 1px solid #2d3139;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: #10b981;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #10b981;
+            animation: pulse-online 2s infinite;
+        }
+
+        @keyframes pulse-online {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        .server-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            text-align: left;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .server-info-item {
+            background-color: #141619;
+            border: 1px solid #2d3139;
+            padding: 1rem;
+            border-radius: 6px;
+        }
+
+        .info-label {
+            display: block;
+            color: #9ca3af;
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .info-value {
+            color: #f3f4f6;
+            font-weight: bold;
+            font-size: 1.05rem;
+        }
+
+        /* Sección de Discord Destacado */
+        .discord-container {
+            background: linear-gradient(135deg, rgba(88, 101, 242, 0.15), rgba(26, 28, 35, 0.9));
+            border: 1px solid #5865F2;
+            padding: 2.5rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 25px rgba(88, 101, 242, 0.2);
+        }
+
+        .discord-container h2 {
+            color: #ffffff;
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .discord-container p {
+            color: #9ca3af;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .discord-btn {
+            background-color: #5865F2;
+            color: white;
+            padding: 0.85rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: background-color 0.2s, transform 0.2s;
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
+        }
+
+        .discord-btn:hover {
+            background-color: #4752C4;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: rgba(13, 14, 17, 0.95);
+            color: #6b7280;
+            font-size: 0.875rem;
+            border-top: 1px solid #1f2937;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-title">
+            <img src="logo.png" alt="Last Signal Logo">
+            <h1>Last Signal</h1>
+        </div>
+        <div class="header-nav">
+            <a href="kits.html" class="nav-btn">Ver Kits / Donaciones</a>
+            <a href="info.html" class="nav-btn">FAQ y Normas</a>
+            <a href="#" class="nav-btn login-btn">Iniciar Sesión</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Bloque de Presentación / Bienvenida -->
+        <div class="hero-section">
+            <h2>Bienvenido a Last Signal</h2>
+            <p>Un servidor hardcore de Project Zomboid diseñado para poner a prueba tus habilidades de supervivencia. Explora, construye, comercia y sobrevive junto a otros jugadores en un entorno hostil.</p>
+        </div>
+
+        <div class="zombie-alert">
+            <strong>TRANSMISIÓN DE EMERGENCIA:</strong> El virus se ha extendido. Reúne recursos, fortifica tu base y sobrevive al horror.
+        </div>
+
+        <!-- SECCIÓN: Estado y Conexión del Servidor -->
+        <div class="server-status-container">
+            <h2>Estado del Servidor</h2>
+            <div id="status-badge" class="status-badge">
+                <span id="status-dot" class="status-dot"></span> Servidor Online
+            </div>
+            <div class="server-info-grid">
+                <div class="server-info-item">
+                    <span class="info-label">IP del Servidor:</span>
+                    <span class="info-value">172.240.18.179</span>
+                </div>
+                <div class="server-info-item">
+                    <span class="info-label">Puerto:</span>
+                    <span class="info-value">27995</span>
+                </div>
+                <div class="server-info-item">
+                    <span class="info-label">Versión del Juego:</span>
+                    <span class="info-value">Build 41.78</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: Comunidad de Discord -->
+        <div class="discord-container">
+            <h2>Comunidad de Supervivientes</h2>
+            <p>Únete a nuestro canal oficial de Discord para reportar bugs, buscar compañeros de escuadrón, ver los canales de voz y enterarte de las novedades.</p>
+            <a href="https://discord.gg/hdFXarmXd" target="_blank" class="discord-btn">
+                Unirse al Discord Oficial
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Last Signal. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Modal de Inicio de Sesión -->
+    <div id="login-modal" style="display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.8);">
+        <div style="background:#1a1c23; margin:15% auto; padding:2rem; width:320px; border:1px solid #ef4444; text-align:center; border-radius:8px;">
+            <h2 style="color:#ef4444; margin-bottom:1rem;">Iniciar Sesión</h2>
+            <button onclick="loginWithGoogle()" style="width:100%; padding:12px; margin-bottom:10px; background:#4285F4; color:white; border:none; border-radius:4px; cursor:pointer; font-weight:bold;">Entrar con Google</button>
+            <button onclick="document.getElementById('login-modal').style.display='none'" style="background:transparent; color:#9ca3af; border:none; cursor:pointer; margin-top:10px;">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Script de Firebase y Autenticación -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+      import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyAcpgIa-azRKJck6ZqwbteOpLExxR3Dx30",
+        authDomain: "lastsignal-a9df1.firebaseapp.com",
+        projectId: "lastsignal-a9df1",
+        storageBucket: "lastsignal-a9df1.firebasestorage.app",
+        messagingSenderId: "402012614176",
+        appId: "1:402012614176:web:dff667facc3925f3579645",
+        measurementId: "G-D61FSQETZ9"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth();
+
+      window.loginWithGoogle = () => {
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(auth, provider)
+          .then((result) => {
+            alert("¡Bienvenido, " + result.user.displayName + "!");
+            document.getElementById('login-modal').style.display = 'none';
+          })
+          .catch((error) => {
+            console.error("Error al iniciar sesión:", error);
+            alert("Hubo un error al iniciar sesión.");
+          });
+      };
+    </script>
+
+</body>
+</html>

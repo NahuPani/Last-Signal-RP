@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información y Normas - Last Signal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #111214;
+            color: #d1d5db;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        header {
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid #22252a;
+            background-color: #141619;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        header h1 {
+            color: #ef4444;
+            font-size: 2rem;
+            text-transform: uppercase;
+        }
+
+        .back-btn {
+            background-color: #374151;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .back-btn:hover {
+            background-color: #4b5563;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 3px auto;
+            padding: 2rem 1.5rem;
+            width: 100%;
+        }
+
+        /* Secciones */
+        .section-container {
+            background-color: #1a1c23;
+            border: 1px solid #2d3139;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .section-container h2 {
+            color: #ef4444;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        /* Estilo Acordeón FAQ */
+        details {
+            background-color: #141619;
+            border: 1px solid #2d3139;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        details[open] {
+            border-color: #ef4444;
+        }
+
+        summary {
+            font-weight: bold;
+            color: #f3f4f6;
+            cursor: pointer;
+            font-size: 1.05rem;
+            outline: none;
+        }
+
+        details p {
+            color: #9ca3af;
+            margin-top: 0.75rem;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        details p strong {
+            color: #f3f4f6;
+        }
+
+        /* Estilo Normas */
+        .rules-list {
+            list-style-type: none;
+            counter-reset: rule-counter;
+        }
+
+        .rules-list li {
+            counter-increment: rule-counter;
+            background-color: #141619;
+            border: 1px solid #2d3139;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            padding: 1rem 1rem 1rem 3.5rem;
+            position: relative;
+            color: #9ca3af;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        .rules-list li::before {
+            content: counter(rule-counter);
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            background-color: #ef4444;
+            color: white;
+            width: 1.8rem;
+            height: 1.8rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        .rules-list li strong {
+            color: #f3f4f6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: #0d0e11;
+            color: #6b7280;
+            font-size: 0.875rem;
+            border-top: 1px solid #1f2937;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Información y Normas</h1>
+        <a href="index.html" class="back-btn">&larr; Volver al Inicio</a>
+    </header>
+
+    <main>
+        <!-- SECCIÓN 1: Preguntas Frecuentes (FAQ) -->
+        <div class="section-container">
+            <h2>Preguntas Frecuentes (FAQ)</h2>
+            
+            <details>
+                <summary>¿Cómo reclamo mi kit después de pagar?</summary>
+                <p>Una vez efectuado el pago, debés dirigirte a nuestro servidor de Discord y abrir un ticket de soporte/donaciones adjuntando tu comprobante de pago junto con el nombre exacto de tu personaje. Un administrador te hará entrega del kit dentro del juego a la brevedad.</p>
+            </details>
+
+            <details>
+                <summary>¿Los kits se entregan automáticamente o los da un admin?</summary>
+                <p>La entrega es manual por parte del equipo de administración tras verificar el ticket en Discord para garantizar que todo llegue al personaje correcto y sin errores.</p>
+            </details>
+
+            <details>
+                <summary>¿Qué pasa si muero y pierdo el kit?</summary>
+                <p>Los kits son una compra única de apoyo al servidor que se entregan al personaje al momento de la compra. Si sufrís una muerte dentro del juego y perdés los objetos, <strong>no hay reintegros automáticos</strong>, ya que forma parte de la jugabilidad Hardcore de Project Zomboid. ¡Cuidá tu equipo!</p>
+            </details>
+        </div>
+
+        <!-- SECCIÓN 2: Normas del Servidor -->
+        <div class="section-container">
+            <h2>Normas del Servidor</h2>
+            <ul class="rules-list">
+                <li><strong>Respeto mutuo:</strong> Queda totalmente prohibido el acoso, la discriminación, los insultos tóxicos o la toxicidad extrema tanto en el chat de texto, de voz del juego, como en el Discord oficial.</li>
+                <li><strong>Construcción de bases:</strong> No está permitido bloquear carreteras principales, accesos a ciudades clave o puntos de interés (como gasolineras o comisarías) con estructuras impenetrables que perjudiquen al resto de la comunidad.</li>
+                <li><strong>Robos y griefing:</strong> Respetá las reglas específicas de PvP/PvE del servidor actuales. Está prohibido destruir bases ajenas si las normas del canal activo lo prohíben expresamente.</li>
+                <li><strong>Uso de exploits y bugs:</strong> Está terminantemente prohibido aprovecharse de errores del juego, bugs de duplicación de objetos o modificaciones externas no autorizadas (cheats/hacks). Su infracción conlleva baneo permanente sin derecho a reclamo.</li>
+                <li><strong>Nombres y lenguaje:</strong> Utilizá nombres de personaje apropiados y evita identificadores ofensivos o que hagan apología a conductas reprochables.</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Last Signal. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
