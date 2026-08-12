@@ -270,7 +270,7 @@
         <div class="header-nav">
             <a href="kits.html" class="nav-btn">Ver Kits / Donaciones</a>
             <a href="info.html" class="nav-btn">FAQ y Normas</a>
-            <a href="#" class="nav-btn login-btn">Iniciar Sesión</a>
+            <a id="login-button" href="https://discord.com/api/oauth2/authorize?client_id=1536962276198842408&redirect_uri=https%3A%2F%2Fnahupani.github.io%2FLast-Signal-RP%2Fcallback.html&response_type=code&scope=identify+email" target="_blank" rel="noopener noreferrer" class="nav-btn login-btn">Iniciar Sesión</a>
         </div>
     </header>
 
@@ -328,7 +328,7 @@
     <script>
         const discordClientId = '1536962276198842408';
         const redirectUri = 'https://nahupani.github.io/Last-Signal-RP/callback.html';
-        const loginButton = document.querySelector('.login-btn');
+        const loginButton = document.querySelector('#login-button');
         const authText = document.getElementById('auth-text');
 
         function bytesToBase64Url(bytes) {
