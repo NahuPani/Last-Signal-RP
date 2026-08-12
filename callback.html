@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callback de Discord - Last Signal</title>
+    <style>
+        body {
+            background-color: #0c0d0f;
+            color: #d1d5db;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            background-image: linear-gradient(rgba(12, 13, 15, 0.95), rgba(12, 13, 15, 0.95));
+        }
+
+        .callback-card {
+            max-width: 520px;
+            width: 100%;
+            background-color: #141619;
+            border: 1px solid #2d3139;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+            text-align: center;
+        }
+
+        .callback-card h1 {
+            color: #ef4444;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .callback-card p {
+            color: #d1d5db;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .callback-card .status {
+            color: #9ca3af;
+            margin-bottom: 1.5rem;
+        }
+
+        .callback-card .btn {
+            display: inline-block;
+            background-color: #ef4444;
+            color: white;
+            padding: 0.85rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .callback-card .btn:hover {
+            background-color: #c62020;
+        }
+    </style>
+</head>
+<body>
+    <div class="callback-card">
+        <h1>Completando inicio de sesión</h1>
+        <div class="status" id="status-text">Validando tu acceso con Discord...</div>
+        <a href="index.html" class="btn">Volver al inicio</a>
+    </div>
+
+    <script>
+        function getQueryParam(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
+
+        function base64UrlEncode(buffer) {
+            let str = '';
+            const bytes = new Uint8Array(buffer);
+            const len = bytes.byteLength;
+            for (let i = 0; i < len; i++) {
+                str += String.fromCharCode(bytes[i]);
+            }
+            return btoa(str).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+        }
+
+        function setStatus(message, isError = false) {
+            const status = document.getElementById('status-text');
+            status.textContent = message;
+            status.style.color = isError ? '#fca5a5' : '#9ca3af';
+        }
+
+        function toFormUrlEncoded(data) {
+            return Object.entries(data)
+                .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+                .join('&');
+        }
+
+        async function exchangeCodeForToken(code, codeVerifier) {
+            const tokenUrl = 'https://discord.com/api/oauth2/token';
+            const body = toFormUrlEncoded({
+                client_id: '1536962276198842408',
+                grant_type: 'authorization_code',
+                code,
+                redirect_uri: 'https://nahupani.github.io/Last-Signal-RP/callback.html',
+                code_verifier: codeVerifier
+            });
+
+            const response = await fetch(tokenUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body
+            });
+
+            if (!response.ok) {
+                const text = await response.text();
+                throw new Error(`Token exchange failed: ${response.status} ${text}`);
+            }
+
+            return response.json();
+        }
+
+        async function fetchDiscordUser(accessToken) {
+            const response = await fetch('https://discord.com/api/users/@me', {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            });
+
+            if (!response.ok) {
+                const text = await response.text();
+                throw new Error(`Failed to fetch Discord user: ${response.status} ${text}`);
+            }
+
+            return response.json();
+        }
+
+        async function init() {
+            const code = getQueryParam('code');
+            if (!code) {
+                setStatus('No se encontró el código de autorización en la URL.', true);
+                return;
+            }
+
+            const codeVerifier = sessionStorage.getItem('discord_oauth_code_verifier');
+            if (!codeVerifier) {
+                setStatus('No se encontró el verificador PKCE. Recargá desde el inicio y probá de nuevo.', true);
+                return;
+            }
+
+            try {
+                setStatus('Intercambiando código por token...');
+                const tokenData = await exchangeCodeForToken(code, codeVerifier);
+                sessionStorage.setItem('discord_oauth_token', tokenData.access_token);
+
+                setStatus('Obteniendo datos del usuario...');
+                const user = await fetchDiscordUser(tokenData.access_token);
+                sessionStorage.setItem('discord_oauth_user', JSON.stringify(user));
+                setStatus(`Bienvenido, ${user.username}#${user.discriminator}. Sesión iniciada correctamente.`);
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2200);
+            } catch (error) {
+                console.error(error);
+                setStatus(error.message, true);
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
