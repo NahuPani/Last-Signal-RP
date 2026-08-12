@@ -270,7 +270,7 @@
         <div class="header-nav">
             <a href="kits.html" class="nav-btn">Ver Kits / Donaciones</a>
             <a href="info.html" class="nav-btn">FAQ y Normas</a>
-            <a id="login-button" href="https://discord.com/api/oauth2/authorize?client_id=1536962276198842408&redirect_uri=https%3A%2F%2Fnahupani.github.io%2FLast-Signal-RP%2Fcallback.html&response_type=code&scope=identify+email" target="_blank" rel="noopener noreferrer" class="nav-btn login-btn">Iniciar Sesión</a>
+            <a id="login-button" href="https://discord.com/oauth2/authorize?client_id=1536962276198842408&response_type=code&redirect_uri=https%3A%2F%2Fnahupani.github.io%2FLast-Signal-RP%2F&scope=identify+email" class="nav-btn login-btn">Iniciar Sesión</a>
         </div>
     </header>
 
@@ -327,7 +327,7 @@
 
     <script>
         const discordClientId = '1536962276198842408';
-        const redirectUri = 'https://nahupani.github.io/Last-Signal-RP/callback.html';
+        const redirectUri = 'https://nahupani.github.io/Last-Signal-RP/';
         const loginButton = document.querySelector('#login-button');
         const authText = document.getElementById('auth-text');
 
@@ -396,11 +396,56 @@
             window.location.href = `https://discord.com/api/oauth2/authorize?${params.toString()}`;
         }
 
+        function getQueryParam(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
+
+        function updateQueryString(paramsToRemove) {
+            const url = new URL(window.location.href);
+            paramsToRemove.forEach(param => url.searchParams.delete(param));
+            window.history.replaceState({}, document.title, url.toString());
+        }
+
+        async function handleDiscordCallback() {
+            const code = getQueryParam('code');
+            const error = getQueryParam('error');
+            if (error) {
+                setStatus(`Error de Discord: ${error}`, true);
+                return;
+            }
+            if (!code) {
+                return;
+            }
+
+            const verifier = sessionStorage.getItem('discord_oauth_code_verifier');
+            if (!verifier) {
+                setStatus('No se encontró el verificador PKCE. Volvé a iniciar sesión desde el inicio.', true);
+                return;
+            }
+
+            try {
+                setStatus('Intercambiando código por token...');
+                const tokenData = await exchangeCodeForToken(code, verifier);
+                sessionStorage.setItem('discord_oauth_token', tokenData.access_token);
+
+                setStatus('Obteniendo datos del usuario...');
+                const user = await fetchDiscordUser(tokenData.access_token);
+                sessionStorage.setItem('discord_oauth_user', JSON.stringify(user));
+                updateAuthStatus();
+                updateQueryString(['code', 'state', 'error']);
+            } catch (error) {
+                console.error(error);
+                setStatus(error.message, true);
+            }
+        }
+
         if (loginButton) {
             loginButton.addEventListener('click', startDiscordLogin);
         }
 
         updateAuthStatus();
+        handleDiscordCallback();
     </script>
 </body>
 </html>
