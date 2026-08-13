@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kits de Supervivencia - Last Signal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #111214;
+            color: #d1d5db;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        header {
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid #22252a;
+            background-color: #141619;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        header h1 {
+            color: #ef4444;
+            font-size: 2rem;
+            text-transform: uppercase;
+        }
+
+        .back-btn {
+            background-color: #374151;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .back-btn:hover {
+            background-color: #4b5563;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
+
+        .kits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .kit-card {
+            background-color: #1a1c23;
+            border: 1px solid #2d3139;
+            border-radius: 8px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .kit-card h3 {
+            color: #ef4444;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .kit-price {
+            font-size: 1.25rem;
+            color: #10b981;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .kit-desc {
+            color: #9ca3af;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .kit-desc ul {
+            margin-top: 0.75rem;
+            margin-left: 1.2rem;
+        }
+
+        .kit-desc li {
+            margin-bottom: 0.25rem;
+        }
+
+        .btn {
+            background-color: #dc2626;
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.2s;
+            display: block;
+        }
+
+        .btn:hover {
+            background-color: #b91c1c;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: #0d0e11;
+            color: #6b7280;
+            font-size: 0.875rem;
+            border-top: 1px solid #1f2937;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Catálogo de Kits</h1>
+        <a href="index.html" class="back-btn">&larr; Volver al Inicio</a>
+    </header>
+
+    <main>
+        <p style="text-align: center; color: #9ca3af; margin-bottom: 2rem;">Seleccioná el kit que querés adquirir para tu personaje en el servidor. Al realizar el pago, abrinos ticket en Discord con tu comprobante.</p>
+
+        <div class="kits-grid">
+            <div class="kit-card">
+                <div>
+                    <h3>Kit de Carpintero / Constructor</h3>
+                    <div class="kit-price">$5 USD</div>
+                    <div class="kit-desc">
+                        Ideal para levantar estructuras y fortificar bases:
+                        <ul>
+                            <li>1x Hacha de leñador</li>
+                            <li>1x Martillo, 1x Sierra, 1x Destornillador</li>
+                            <li>3x Cajas de clavos, 2x Cajas de tornillos</li>
+                            <li>Libros de Carpintería (Vol. 1 al 5)</li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="AQUÍ_LINK_PAGO_KIT_1" target="_blank" class="btn">Comprar Kit Carpintería</a>
+            </div>
+
+            <div class="kit-card">
+                <div>
+                    <h3>Kit de Mecánico y Automoción</h3>
+                    <div class="kit-price">$5 USD</div>
+                    <div class="kit-desc">
+                        Equipamiento completo para mantenimiento vehicular:
+                        <ul>
+                            <li>1x Gato, Llave de cruz, Llave inglesa, Destornillador</li>
+                            <li>1x Inflador, Cargador de batería, 2x Bidones llenos</li>
+                            <li>Libros de Mecánica de Automóviles (Vol. 1 al 5)</li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="AQUÍ_LINK_PAGO_KIT_2" target="_blank" class="btn">Comprar Kit Mecánica</a>
+            </div>
+
+            <div class="kit-card">
+                <div>
+                    <h3>Kit de Soldador y Metalurgia</h3>
+                    <div class="kit-price">$5 USD</div>
+                    <div class="kit-desc">
+                        Perfecto para refuerzos metálicos pesados:
+                        <ul>
+                            <li>1x Soplete, 1x Máscara de soldar</li>
+                            <li>3x Cajas de varillas de soldadura, 1x Bombona</li>
+                            <li>Libros de Habilidad Metalurgia (Vol. 1 al 5)</li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="AQUÍ_LINK_PAGO_KIT_3" target="_blank" class="btn">Comprar Kit Soldador</a>
+            </div>
+
+            <div class="kit-card">
+                <div>
+                    <h3>Kit de Electricista</h3>
+                    <div class="kit-price">$5 USD</div>
+                    <div class="kit-desc">
+                        La energía y automatización para tu base:
+                        <ul>
+                            <li>1x Generador, 1x Destornillador</li>
+                            <li>Cables, Chatarra electrónica, Radiorreceptores</li>
+                            <li>Libros de Electricidad (Vol. 1 al 5)</li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="AQUÍ_LINK_PAGO_KIT_4" target="_blank" class="btn">Comprar Kit Electricista</a>
+            </div>
+
+            <div class="kit-card">
+                <div>
+                    <h3>Kit de Sastre y Costura</h3>
+                    <div class="kit-price">$5 USD</div>
+                    <div class="kit-desc">
+                        Reforzá tu ropa contra mordiscos y arañazos:
+                        <ul>
+                            <li>Agujas, Tijeras, Bobinas de hilo</li>
+                            <li>Tiras de tela, vaqueras y de cuero</li>
+                            <li>Libros de Sastrería (Vol. 1 al 5)</li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="AQUÍ_LINK_PAGO_KIT_5" target="_blank" class="btn">Comprar Kit Sastrería</a>
+            </div>
+        </div>
+
+        <div style="background-color: #1a1c23; border: 1px solid #2d3139; padding: 2rem; border-radius: 8px; text-align: center; margin-top: 3rem;">
+            <h2 style="color: #f3f4f6; margin-bottom: 1rem;">🙏 Donación Libre</h2>
+            <p style="color: #9ca3af; margin-bottom: 2rem;">¿Querés apoyar al mantenimiento del servidor con otro monto? Tu ayuda es fundamental.</p>
+            <a href="https://www.paypal.com/ncp/payment/HFFJRN6TAJHRJ" target="_blank" class="btn" style="background-color: #10b981; display: inline-block; width: auto; padding: 0.75rem 2rem;">Donar con PayPal</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Last Signal. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
