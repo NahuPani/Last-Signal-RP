@@ -43,6 +43,7 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+            text-decoration: none;
         }
 
         .logo-title img {
@@ -92,7 +93,6 @@
             width: 100%;
         }
 
-        /* Sección de Bienvenida / Presentación */
         .hero-section {
             background-color: rgba(26, 28, 35, 0.9);
             border: 1px solid #2d3139;
@@ -118,7 +118,6 @@
             margin: 0 auto;
         }
 
-        /* Banner de Alerta Zombi */
         .zombie-alert {
             background-color: rgba(127, 29, 29, 0.2);
             border-left: 4px solid #ef4444;
@@ -131,7 +130,6 @@
             font-size: 1.05rem;
         }
 
-        /* Estado del Servidor */
         .server-status-container {
             background-color: rgba(26, 28, 35, 0.9);
             border: 1px solid #2d3139;
@@ -206,7 +204,127 @@
             font-size: 1.05rem;
         }
 
-        /* Sección de Discord Destacado */
+        .events-container {
+            background-color: rgba(26, 28, 35, 0.9);
+            border: 1px solid #2d3139;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+            text-align: center;
+        }
+
+        .events-container h2 {
+            color: #ef4444;
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .events-container p.lead {
+            color: #9ca3af;
+            margin-bottom: 1rem;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .event-item {
+            background-color: #141619;
+            border: 1px solid #2d3139;
+            padding: 1rem;
+            border-radius: 6px;
+        }
+
+        .event-name {
+            color: #f3f4f6;
+            font-weight: bold;
+            font-size: 1.05rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .event-date {
+            color: #ef4444;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .event-desc {
+            color: #9ca3af;
+            font-size: 0.95rem;
+        }
+
+        .devlog-container {
+            background-color: rgba(26, 28, 35, 0.9);
+            border: 1px solid #2d3139;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+            text-align: center;
+        }
+
+        .devlog-container h2 {
+            color: #ef4444;
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .devlog-container p.lead {
+            color: #9ca3af;
+            margin-bottom: 1rem;
+        }
+
+        .devlog-list {
+            display: grid;
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .devlog-item {
+            background-color: #141619;
+            border: 1px solid #2d3139;
+            padding: 1.25rem;
+            border-radius: 6px;
+        }
+
+        .devlog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+
+        .devlog-title {
+            color: #f3f4f6;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .devlog-date {
+            color: #ef4444;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .devlog-item p {
+            color: #9ca3af;
+            font-size: 0.96rem;
+            line-height: 1.7;
+        }
+
         .discord-container {
             background: linear-gradient(135deg, rgba(88, 101, 242, 0.15), rgba(26, 28, 35, 0.9));
             border: 1px solid #5865F2;
@@ -226,8 +344,16 @@
 
         .discord-container p {
             color: #9ca3af;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             font-size: 1rem;
+        }
+
+        .social-buttons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .discord-btn {
@@ -241,19 +367,56 @@
             display: inline-flex;
             align-items: center;
             gap: 0.75rem;
-            transition: background-color 0.2s, transform 0.2s;
+            transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
         }
 
         .discord-btn:hover {
             background-color: #4752C4;
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.6);
+        }
+
+        .tiktok-btn {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: white;
+            padding: 0.85rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 245, 255, 0.2);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tiktok-btn:hover {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 245, 255, 0.4);
+            border-color: rgba(0, 245, 255, 0.6);
+        }
+
+        .tiktok-icon {
+            display: inline-block;
+            width: 1.2em;
+            height: 1.2em;
+            background: linear-gradient(45deg, #25f4ee 0%, #ff0050 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
         }
 
         footer {
             text-align: center;
             padding: 1.5rem;
-            background-color: rgba(13, 14, 17, 0.95);
+            background-color: #0d0e11;
             color: #6b7280;
             font-size: 0.875rem;
             border-top: 1px solid #1f2937;
@@ -270,16 +433,10 @@
         <div class="header-nav">
             <a href="kits.html" class="nav-btn">Ver Kits / Donaciones</a>
             <a href="info.html" class="nav-btn">FAQ y Normas</a>
-            <a id="login-button" href="https://discord.com/oauth2/authorize?client_id=1536962276198842408&response_type=code&redirect_uri=https%3A%2F%2Fnahupani.github.io%2FLast-Signal-RP%2Fcallback.html&scope=identify+email" class="nav-btn login-btn">Iniciar Sesión</a>
         </div>
     </header>
 
-    <div id="auth-status" style="text-align:center; padding: 0.5rem 1.5rem; color:#9ca3af;">
-        <p id="auth-text">Iniciá sesión con Discord para conectar tu cuenta.</p>
-    </div>
-
     <main>
-        <!-- Bloque de Presentación / Bienvenida -->
         <div class="hero-section">
             <h2>Bienvenido a Last Signal</h2>
             <p>Un servidor hardcore de Project Zomboid diseñado para poner a prueba tus habilidades de supervivencia. Explora, construye, comercia y sobrevive junto a otros jugadores en un entorno hostil.</p>
@@ -289,7 +446,6 @@
             <strong>TRANSMISIÓN DE EMERGENCIA:</strong> El virus se ha extendido. Reúne recursos, fortifica tu base y sobrevive al horror.
         </div>
 
-        <!-- SECCIÓN: Estado y Conexión del Servidor -->
         <div class="server-status-container">
             <h2>Estado del Servidor</h2>
             <div id="status-badge" class="status-badge">
@@ -311,13 +467,27 @@
             </div>
         </div>
 
-        <!-- SECCIÓN: Comunidad de Discord -->
+        <section class="events-container">
+            <h2>Calendario de Eventos</h2>
+            <p class="lead">Próximos eventos del servidor.</p>
+            <div id="events-grid" class="events-grid"></div>
+        </section>
+
+        <section class="devlog-container">
+            <h2>Noticias / Devlog</h2>
+            <p class="lead">Actualizaciones del desarrollo del servidor y cambios de contenido.</p>
+            <div id="devlog-list" class="devlog-list"></div>
+        </section>
+
         <div class="discord-container">
             <h2>Comunidad de Supervivientes</h2>
-            <p>Únete a nuestro canal oficial de Discord para reportar bugs, buscar compañeros de escuadrón, ver los canales de voz y enterarte de las novedades.</p>
-            <a href="https://discord.gg/hdFXarmXd" target="_blank" class="discord-btn">
-                Unirse al Discord Oficial
-            </a>
+            <p>Únete a nuestro canal oficial de Discord para reportar bugs, buscar compañeros y enterarte de las novedades. Síguenos en TikTok para ver clips.</p>
+            <div class="social-buttons">
+                <a href="https://discord.gg/hdFXarmXd" target="_blank" class="discord-btn">Unirse al Discord Oficial</a>
+                <a href="https://www.tiktok.com/@rp.signal?_r=1&_t=ZN-98pQ3Y7FtBO" target="_blank" class="tiktok-btn">
+                    <span class="tiktok-icon">♪</span> Síguenos en TikTok
+                </a>
+            </div>
         </div>
     </main>
 
@@ -326,126 +496,61 @@
     </footer>
 
     <script>
-        const discordClientId = '1536962276198842408';
-        const redirectUri = 'https://nahupani.github.io/Last-Signal-RP/callback.html';
-        const loginButton = document.querySelector('#login-button');
-        const authText = document.getElementById('auth-text');
+        // Modificá los eventos directamente acá abajo cuando quieras:
+        const events = [
+            { name: 'Próximamente', date: '2026-08-12T00:00:00', desc: 'No hay eventos programados por el momento. ¡Mantente atento a las novedades!' }
+        ];
 
-        function bytesToBase64Url(bytes) {
-            let binary = '';
-            const len = bytes.byteLength;
-            const view = new Uint8Array(bytes);
-            for (let i = 0; i < len; i++) {
-                binary += String.fromCharCode(view[i]);
-            }
-            return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+        function formatDateString(dateStr) {
+            const d = new Date(dateStr);
+            if (isNaN(d)) return dateStr;
+            return d.toLocaleString(undefined, { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
         }
 
-        async function sha256(message) {
-            const encoder = new TextEncoder();
-            const data = encoder.encode(message);
-            return await window.crypto.subtle.digest('SHA-256', data);
-        }
-
-        async function createCodeChallenge(verifier) {
-            const hashed = await sha256(verifier);
-            return bytesToBase64Url(hashed);
-        }
-
-        function generateRandomString(length) {
-            const array = new Uint8Array(length);
-            window.crypto.getRandomValues(array);
-            return Array.from(array, byte => ('0' + byte.toString(16)).slice(-2)).join('');
-        }
-
-        function updateAuthStatus() {
-            const userJson = sessionStorage.getItem('discord_oauth_user');
-            if (userJson) {
-                const user = JSON.parse(userJson);
-                if (loginButton) {
-                    loginButton.textContent = `Conectado: ${user.username}`;
-                    loginButton.href = '#';
-                    loginButton.style.pointerEvents = 'none';
-                    loginButton.style.opacity = '0.75';
-                }
-                if (authText) {
-                    authText.textContent = `Sesión iniciada como ${user.username}#${user.discriminator}.`;
-                }
-                return;
-            }
-            if (authText) {
-                authText.textContent = 'Iniciá sesión con Discord para conectar tu cuenta.';
-            }
-        }
-
-        async function startDiscordLogin(event) {
-            event.preventDefault();
-            const verifier = generateRandomString(64);
-            sessionStorage.setItem('discord_oauth_code_verifier', verifier);
-            const challenge = await createCodeChallenge(verifier);
-
-            const params = new URLSearchParams({
-                client_id: discordClientId,
-                redirect_uri: redirectUri,
-                response_type: 'code',
-                scope: 'identify email',
-                code_challenge: challenge,
-                code_challenge_method: 'S256'
+        function renderEventsList() {
+            const grid = document.getElementById('events-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            events.slice(0, 3).forEach(ev => {
+                const item = document.createElement('article');
+                item.className = 'event-item';
+                item.innerHTML = `
+                    <h3 class="event-name">${ev.name}</h3>
+                    <time class="event-date" datetime="${ev.date}">${formatDateString(ev.date)}</time>
+                    <p class="event-desc">${ev.desc}</p>
+                `;
+                grid.appendChild(item);
             });
-
-            window.location.href = `https://discord.com/api/oauth2/authorize?${params.toString()}`;
         }
 
-        function getQueryParam(name) {
-            const params = new URLSearchParams(window.location.search);
-            return params.get(name);
+        // Modificá las noticias / devlog directamente acá abajo cuando quieras:
+        const devlogEntries = [
+            { title: 'Nuevo Mod de Música', date: '2026-08-12', text: 'Estamos desarrollando e implementando nuevas pistas de audio para mejorar la atmósfera y ambientación del servidor.' },
+            { title: 'Mod de Construcción', date: '2026-08-12', text: 'Se está creando e implementando un nuevo mod enfocado en expandir las opciones y mecánicas de construcción de bases.' },
+            { title: 'Mod de Revivir', date: '2026-08-12', text: 'Trabajando en el desarrollo de un mod para habilitar y configurar la mecánica de revivir jugadores en el servidor.' }
+        ];
+        function renderDevlogList() {
+            const list = document.getElementById('devlog-list');
+            if (!list) return;
+            list.innerHTML = '';
+            devlogEntries.slice(0, 3).forEach(entry => {
+                const item = document.createElement('article');
+                item.className = 'devlog-item';
+                item.innerHTML = `
+                    <div class="devlog-header">
+                        <h3 class="devlog-title">${entry.title}</h3>
+                        <time class="devlog-date" datetime="${entry.date}">${new Date(entry.date + 'T00:00:00').toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}</time>
+                    </div>
+                    <p>${entry.text}</p>
+                `;
+                list.appendChild(item);
+            });
         }
 
-        function updateQueryString(paramsToRemove) {
-            const url = new URL(window.location.href);
-            paramsToRemove.forEach(param => url.searchParams.delete(param));
-            window.history.replaceState({}, document.title, url.toString());
-        }
-
-        async function handleDiscordCallback() {
-            const code = getQueryParam('code');
-            const error = getQueryParam('error');
-            if (error) {
-                setStatus(`Error de Discord: ${error}`, true);
-                return;
-            }
-            if (!code) {
-                return;
-            }
-
-            const verifier = sessionStorage.getItem('discord_oauth_code_verifier');
-            if (!verifier) {
-                setStatus('No se encontró el verificador PKCE. Volvé a iniciar sesión desde el inicio.', true);
-                return;
-            }
-
-            try {
-                setStatus('Intercambiando código por token...');
-                const tokenData = await exchangeCodeForToken(code, verifier);
-                sessionStorage.setItem('discord_oauth_token', tokenData.access_token);
-
-                setStatus('Obteniendo datos del usuario...');
-                const user = await fetchDiscordUser(tokenData.access_token);
-                sessionStorage.setItem('discord_oauth_user', JSON.stringify(user));
-                updateAuthStatus();
-                updateQueryString(['code', 'state', 'error']);
-            } catch (error) {
-                console.error(error);
-                setStatus(error.message, true);
-            }
-        }
-
-        if (loginButton) {
-            loginButton.addEventListener('click', startDiscordLogin);
-        }
-
-        updateAuthStatus();
-        handleDiscordCallback();
+        document.addEventListener('DOMContentLoaded', () => {
+            renderEventsList();
+            renderDevlogList();
+        });
     </script>
 </body>
 </html>
